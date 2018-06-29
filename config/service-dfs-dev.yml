@@ -1,6 +1,6 @@
 spring:
   profiles:
-      include: app-redis,app-config-client,app-eureka-client
+      include: app-redis
 
 cloud:
   user: 测试分布式文件
