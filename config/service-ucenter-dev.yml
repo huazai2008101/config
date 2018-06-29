@@ -1,0 +1,47 @@
+#--------------------公共配置区-------------------
+spring:
+  #redis服务器配置
+  redis:
+    host: 172.19.7.140
+    password:
+    port: 6379
+    timeout: 180s
+    jedis:
+      pool:
+        max-active: 500
+        min-idle: 0
+        max-idle: 8
+        max-wait: 120s
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:com/suneee/ems/**/mapper/*.xml
+  type-aliases-package: com.suneee.ems.ucenter.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+
+#数据源配置
+hikari:
+  master:
+    jdbc-url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&verifyServerCertificate=false
+    username: root
+    password: root
+    maximum-pool-size: 20
+    pool-name: master
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1765000
+  slave:
+    jdbc-url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&verifyServerCertificate=false
+    username: root
+    password: root
+    maximum-pool-size: 80
+    pool-name: slave
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1765000
+    read-only: true
+
+#--------------------系统配置区-------------------
+cloud:
+  user: 测试分布式文件
