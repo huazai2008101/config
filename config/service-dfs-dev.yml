@@ -1,6 +1,18 @@
+#--------------------公共配置区-------------------
+#redis服务器配置
 spring:
-  profiles:
-      include: app-redis.yml
+  redis:
+    host: 172.19.7.140
+    password:
+    port: 6379
+    timeout: 180s
+    jedis:
+      pool:
+        max-active: 500
+        min-idle: 0
+        max-idle: 8
+        max-wait: 120s
 
+#--------------------系统配置区-------------------
 cloud:
   user: 测试分布式文件
