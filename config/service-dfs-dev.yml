@@ -1,6 +1,6 @@
 spring:
   profiles:
-      include: app-redis
+      include: app-redis.yml
 
 cloud:
   user: 测试分布式文件
