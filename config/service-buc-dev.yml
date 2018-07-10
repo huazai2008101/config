@@ -45,5 +45,3 @@ mybatis:
   config-location: classpath:conf/configuration.xml
 
 
-#截取标题长度，如果不设置默认为25。
-titleLen=20
