@@ -1,6 +1,10 @@
-#--------------------公共配置区-------------------
-#redis服务器配置
 spring:
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+    time-zone: GMT+8
+
+  #redis配置
   redis:
     host: 172.19.7.140
     password:
@@ -13,4 +17,88 @@ spring:
         max-idle: 8
         max-wait: 120s
 
-#--------------------系统配置区-------------------
+  #流程引擎activiti配置
+  activiti:
+    check-process-definitions: false
+    async-executor-activate: false
+    fs:
+      rootFolder: /data
+      depth: 4
+      blockSize: 1024
+
+  #配置文件上传大小
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1000Mb
+      max-request-size: 5000Mb
+  #  分布式session配置
+  session:
+    timeout: 43200s
+  #freemarker配置
+  freemarker:
+    request-context-attribute: request
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:com/suneee/**/mapper/**/*.xml
+  type-aliases-package: com.suneee.**.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+
+#文件上传下载配置
+uploader:
+  type: minio
+  minio:
+    bucket:
+      lhy: suneee
+    url: 172.19.7.102
+    port: 9000
+    accessKey: suneee
+    secretKey: suneeeminio
+    secure: false
+    urlExpire: 86400
+  localFs:
+    storePath: /opt/data/eas
+    url: http://dev.suneee.com/store
+
+
+#文件柜处理
+fs:
+  docFile:
+    departmentId: 2
+    personalId: 4
+    publicId: 3
+    groupId: 6
+    flowFileId: 40
+
+#系统配置
+system:
+  #姓名模式，alias为字号模式，其他为姓名模式
+  username-mode: alias
+  #当前运行环境
+  runtimeEnv: lhy
+
+#数据源配置
+hikari:
+  master:
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: jdbc:mysql://172.19.6.127:3306/cloud_dev_lhyoa?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&verifyServerCertificate=false
+    username: root
+    password: suneee
+    maximum-pool-size: 20
+    pool-name: master
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1765000
+  slave:
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: jdbc:mysql://172.19.6.127:3306/cloud_dev_lhyoa?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&verifyServerCertificate=false
+    username: root
+    password: suneee
+    maximum-pool-size: 80
+    pool-name: slave
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1765000
+    read-only: true
