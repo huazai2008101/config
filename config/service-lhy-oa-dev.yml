@@ -102,3 +102,15 @@ hikari:
     idle-timeout: 600000
     max-lifetime: 1765000
     read-only: true
+   
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.19.6.140:8000/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    # 每隔10s发送一次心跳
+    lease-renewal-interval-in-seconds: 10
+    # 告知服务端30秒还未收到心跳的话，就将该服务移除列表
+    lease-expiration-duration-in-seconds: 30
